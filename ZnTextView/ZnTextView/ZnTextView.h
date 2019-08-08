@@ -2,7 +2,7 @@
 //  ZnTextView.h
 //  ZnTextView
 //
-//  Created by Seungjun Lee on 06/08/2019.
+//  Created by Znfod on 06/08/2019.
 //  Copyright © 2019 znfod. All rights reserved.
 //
 

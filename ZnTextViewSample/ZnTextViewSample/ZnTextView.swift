@@ -2,7 +2,7 @@
 //  ZnTextView.swift
 //  ZnTextView
 //
-//  Created by Seungjun Lee on 06/08/2019.
+//  Created by Znfod on 06/08/2019.
 //  Copyright © 2019 znfod. All rights reserved.
 //
 
@@ -123,7 +123,7 @@ class ZnTextView: UITextView, UITextViewDelegate {
         self.toolBar.items = self.barItemList
     }
     
-    func setDefaultBarItemList() {
+    private func setDefaultBarItemList() {
         self.barItemList = Array.init()
         
         self.barItemList.append(UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))

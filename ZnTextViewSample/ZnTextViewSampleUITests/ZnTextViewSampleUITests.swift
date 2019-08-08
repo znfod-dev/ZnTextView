@@ -2,7 +2,7 @@
 //  ZnTextViewSampleUITests.swift
 //  ZnTextViewSampleUITests
 //
-//  Created by Seungjun Lee on 08/08/2019.
+//  Created by Znfod on 08/08/2019.
 //  Copyright © 2019 znfod. All rights reserved.
 //
 
