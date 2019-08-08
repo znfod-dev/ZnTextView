@@ -10,7 +10,19 @@ import UIKit
 
 class ZnTextView: UITextView, UITextViewDelegate {
     
-    var placeHolder:UILabel!
+    var placeHolder:UILabel = UILabel.init()
+    
+    // placeHolder TextColor
+    @IBInspectable var hintTextColor: UIColor? {
+        didSet {
+            self.placeHolder.textColor = hintTextColor
+        }
+    }
+    @IBInspectable var hintText: String? {
+        didSet {
+            self.placeHolder.text = hintText
+        }
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -22,32 +34,40 @@ class ZnTextView: UITextView, UITextViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(self.onBeginEditing(_:)), name: UITextView.textDidBeginEditingNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onEndEditing(_:)), name: UITextView.textDidEndEditingNotification, object: nil)
         
+        
         print("init end")
     }
+    
+    // 초기값 설정
     private func setupView() {
         print("setupView")
-        self.textColor = UIColor.black
+        
     }
     
     private func addPlaceHolderLabel() {
         print("addPlaceHolderLabel")
         self.placeHolder = UILabel.init(frame: CGRect.init(x: 10.0, y: 5.0, width: self.frame.width-20.0, height: 20.0))
-        self.placeHolder.text = "Add comment here"
-        self.placeHolder.textColor = UIColor.lightGray
         self.placeHolder.font = UIFont.init(name: "HelveticaNeue", size: 14.0)
+        if hintTextColor == nil {
+            self.placeHolder.textColor = UIColor.lightGray
+        }
+        if hintText == nil {
+            self.placeHolder.text = "Add Comment Here"
+        }
         self.placeHolder.textAlignment = NSTextAlignment.left
         self.placeHolder.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.placeHolder)
         
+        
         // setup constraints
         // left constraint
-        let leftConstraint = NSLayoutConstraint(item: self.placeHolder!, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: 10.0)
+        let leftConstraint = NSLayoutConstraint(item: self.placeHolder, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: 10.0)
         // right constraint
-        let rightConstraint = NSLayoutConstraint(item: self.placeHolder!, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1.0, constant: 10.0)
+        let rightConstraint = NSLayoutConstraint(item: self.placeHolder, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1.0, constant: 10.0)
         // top constraint
-        let topConstraint = NSLayoutConstraint(item: self.placeHolder!, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 10.0)
+        let topConstraint = NSLayoutConstraint(item: self.placeHolder, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 10.0)
         // height constraint
-        let heightConstraint = NSLayoutConstraint(item: self.placeHolder!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 20.0)
+        let heightConstraint = NSLayoutConstraint(item: self.placeHolder, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 20.0)
         self.addConstraint(leftConstraint)
         self.addConstraint(rightConstraint)
         self.addConstraint(topConstraint)
@@ -111,3 +131,6 @@ class ZnTextView: UITextView, UITextViewDelegate {
     }
     
 }
+
+
+

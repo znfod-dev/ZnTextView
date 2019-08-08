@@ -14,7 +14,6 @@ class ViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
-        //textView.delegate = textView
         
     }
     
