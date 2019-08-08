@@ -11,6 +11,9 @@ import UIKit
 class ZnTextView: UITextView, UITextViewDelegate {
     
     var placeHolder:UILabel = UILabel.init()
+    var toolBar:UIToolbar = UIToolbar.init()
+    var barItemList:Array<UIBarButtonItem> = Array<UIBarButtonItem>()
+    
     
     // placeHolder TextColor
     @IBInspectable var hintTextColor: UIColor? {
@@ -103,18 +106,31 @@ class ZnTextView: UITextView, UITextViewDelegate {
     
     
     private func initToolbar() {
+        self.toolBar = UIToolbar.init(frame: CGRect.init(x: 0, y: 0, width: 320, height: 50))
+        self.toolBar.barStyle = .default
+        if self.barItemList.count == 0 {
+            self.setDefaultBarItemList()
+        }
+        self.toolBar.items = self.barItemList
+        self.toolBar.sizeToFit()
+        self.inputAccessoryView = self.toolBar
+        
         
     }
     
-    func setBarStyle() {
-        
+    func setBarItemList(barItemList:Array<UIBarButtonItem>) {
+        self.barItemList = barItemList
+        self.toolBar.items = self.barItemList
     }
     
-    func setBarItem(barItems:Array<UIBarButtonItem>) {
+    func setDefaultBarItemList() {
+        self.barItemList = Array.init()
         
+        self.barItemList.append(UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
+        self.barItemList.append(UIBarButtonItem.init(title: "확인", style: .done, target: self, action: #selector(self.dismissKeyboard)))
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         self.resignFirstResponder()
     }
     
